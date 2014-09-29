@@ -93,12 +93,13 @@ public class GameHelper {
                         keyRole = Game.Role.DOC;
                     } else if (countMafia >= (maxMafia+2) && countMafia < (listContacts.size() - 1)) {
                         keyRole = Game.Role.CITIZEN;
-                    } else if (countMafia == (listContacts.size() - 1) && listContacts.size() >= (Game.MIN_GAMERS + 1)
+                    } else if (countMafia == (listContacts.size() - 1) && (listContacts.size() >= (Game.MIN_GAMERS + 1) || !useDoctor)
                             && useSniper) {
                         keyRole = Game.Role.SNIPER;
                     }
 
                     item.role = keyRole;
+                    keyRole = Game.Role.CITIZEN;
                     countMafia++;
                     listContactWithRole.add(item);
                 }
