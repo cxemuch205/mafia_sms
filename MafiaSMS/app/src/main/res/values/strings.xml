@@ -31,5 +31,7 @@
     <string name="role_citizen">Citizen</string>
     <string name="change">Change</string>
     <string name="use_role">Use role:</string>
+    <string name="enable_sending">Enable sending:</string>
+    <string name="send_enable_switch">Send</string>
 
 </resources>

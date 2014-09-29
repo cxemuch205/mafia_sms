@@ -133,13 +133,14 @@ public class GameHelper {
                 for (int i = 0; i < listContactWithRole.size(); i++) {
                     Contact contact = listContactWithRole.get(i);
                     final String msgSendData = "Sending msg to: " + contact.name + " \nRole: " + getNameRoleById(activity, contact.role);
+                    String message = "MAFIA\nYou role is " + getNameRoleById(activity, contact.role);
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             listener.onProgressMessage(msgSendData);
                         }
                     });
-                    sendMessageToContact(smsManager, contact, msgSendData);
+                    sendMessageToContact(activity.getSharedPreferences(App.Pref.NAME_PREF, 0), smsManager, contact, message);
                     try {
                         TimeUnit.MILLISECONDS.sleep(1000);
                     } catch (InterruptedException e) {
@@ -157,8 +158,9 @@ public class GameHelper {
         }).start();
     }
 
-    public static void sendMessageToContact(SmsManager smsManager, Contact contact, String message) {
-        if (App.ACCESS_SEND_MESSAGE) {
+    public static void sendMessageToContact(SharedPreferences pref, SmsManager smsManager, Contact contact, String message) {
+        if (pref.getBoolean(App.Pref.ENABLE_SENDING, false)) {
+            Log.d(TAG, "SEND ENABLED");
             smsManager.sendTextMessage(
                     contact.phoneNumber,
                     null,

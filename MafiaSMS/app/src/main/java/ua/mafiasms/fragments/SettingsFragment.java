@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import ua.mafiasms.R;
 import ua.mafiasms.constants.App;
@@ -23,6 +24,7 @@ public class SettingsFragment extends Fragment {
     public static final String TAG = "SettingsFragment";
 
     private CheckBox cbUseDoctor, cbUseSniper, cbUseDonMafia;
+    private Switch sSendingEnable;
     private SharedPreferences pref;
 
     private static SettingsFragment instance;
@@ -50,6 +52,7 @@ public class SettingsFragment extends Fragment {
         cbUseDoctor = (CheckBox) llRoot.findViewById(R.id.cb_use_doctor);
         cbUseSniper = (CheckBox) llRoot.findViewById(R.id.cb_use_sniper);
         cbUseDonMafia = (CheckBox) llRoot.findViewById(R.id.cb_use_don);
+        sSendingEnable = (Switch) llRoot.findViewById(R.id.s_enable_sending);
         return llRoot;
     }
 
@@ -59,14 +62,17 @@ public class SettingsFragment extends Fragment {
         boolean useDoctor = pref.getBoolean(App.Pref.WITH_DOCTOR, true);
         boolean useSniper = pref.getBoolean(App.Pref.WITH_SNIPER, true);
         boolean useDon = pref.getBoolean(App.Pref.WITH_DON, true);
+        boolean enableSending = pref.getBoolean(App.Pref.ENABLE_SENDING, false);
 
         cbUseDoctor.setChecked(useDoctor);
         cbUseSniper.setChecked(useSniper);
         cbUseDonMafia.setChecked(useDon);
+        sSendingEnable.setChecked(enableSending);
 
         cbUseDoctor.setOnCheckedChangeListener(checkedChangeListener);
         cbUseSniper.setOnCheckedChangeListener(checkedChangeListener);
         cbUseDonMafia.setOnCheckedChangeListener(checkedChangeListener);
+        sSendingEnable.setOnCheckedChangeListener(checkedChangeListener);
     }
 
     private CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -82,6 +88,9 @@ public class SettingsFragment extends Fragment {
                     break;
                 case R.id.cb_use_don:
                     editor.putBoolean(App.Pref.WITH_DON, isChecked).commit();
+                    break;
+                case R.id.s_enable_sending:
+                    editor.putBoolean(App.Pref.ENABLE_SENDING, isChecked).commit();
                     break;
             }
         }
