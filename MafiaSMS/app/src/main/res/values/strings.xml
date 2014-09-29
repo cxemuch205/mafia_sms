@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mafia SMS</string>
+    <string name="info_splash_screen">Mafia sms - application in controlling the game, the distribution of roles, etc.</string>
+    <string name="title_activity_get_contacts">Select contacts</string>
+    <string name="ok">OK</string>
+    <string name="title_activity_game_process">GameProcessActivity</string>
+    <string name="title_section1">Control panel</string>
+    <string name="title_section2">List gamers</string>
+    <string name="title_section3">Settings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="select_items">Select items, min %d</string>
+    <string name="enter_name_or_phone">Enter name or phone</string>
+    <string name="distribute_role">Distribute role</string>
+    <string name="send_messages">Send messages</string>
+    <string name="resend">Resend role</string>
+    <string name="progress_start_distributing">Start distributing role</string>
+    <string name="progress_get_user_ids">Check ser ids, mixing</string>
+    <string name="progress_apply_role">Apply role by ids</string>
+    <string name="progress_sending_msg">Sending msg...</string>
+    <string name="ending">Ending...</string>
+    <string name="recommended_number__of_maia">№ mafia, recommended %d</string>
+    <string name="role_don_mafia">Don mafia</string>
+    <string name="role_mafia">Mafia</string>
+    <string name="role_sheriff">Sheriff</string>
+    <string name="role_doctor">Doctor</string>
+    <string name="role_sniper">Sniper</string>
+    <string name="role_citizen">Citizen</string>
+    <string name="change">Change</string>
+
+</resources>

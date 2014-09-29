@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    android:paddingTop="16dp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/et_max_mafia" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/distribute_role"
+        android:layout_marginTop="8dp"
+        android:id="@+id/btn_distribute_role"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_messages"
+        android:id="@+id/btn_send_msgs"
+        android:layout_marginBottom="8dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#929292"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lv_info"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
