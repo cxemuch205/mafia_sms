@@ -112,10 +112,11 @@ public class GetContactsActivity extends Activity {
 
                         ,0,10);
                         pb.setVisibility(ProgressBar.VISIBLE);
-                    }
-                    else {
+                        lvContacts.setVisibility(ListView.GONE);
+                    } else {
                     itemMenuOk.setVisible(true);
                     etFilter.setEnabled(true);
+                    lvContacts.setVisibility(ListView.VISIBLE);
                     pb.setVisibility(ProgressBar.GONE);
                 }
             }
