@@ -15,5 +15,6 @@ public class App {
         public static final String NAME_PREF = "app_preferences";
         public static final String WITH_DON = "with_don";
         public static final String WITH_SNIPER = "with_sniper";
+        public static final String WITH_DOCTOR = "with_doctor";
     }
 }

@@ -2,6 +2,7 @@ package ua.mafiasms.helpers;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.telephony.SmsManager;
 import android.util.Log;
 
@@ -28,6 +29,10 @@ public class GameHelper {
             listener.onProgressDistributing(activity, activity.getString(R.string.progress_start_distributing));
             listener.onStartDistribute(activity);
         }
+        final SharedPreferences pref = activity.getSharedPreferences(App.Pref.NAME_PREF, 0);
+        final boolean useDon = pref.getBoolean(App.Pref.WITH_DON, true);
+        final boolean useDoctor = pref.getBoolean(App.Pref.WITH_DOCTOR, true);
+        final boolean useSniper = pref.getBoolean(App.Pref.WITH_SNIPER, true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -73,8 +78,10 @@ public class GameHelper {
                         listener.onProgressDistributing(activity, activity.getString(R.string.progress_apply_role));
                     }
                 });
-                int keyRole = Game.Role.DON_MAFIA,
-                    countMafia = 0;
+                int keyRole = Game.Role.MAFIA;
+                if(useDon)
+                    keyRole = Game.Role.DON_MAFIA;
+                int countMafia = 0;
                 for (int i = 0; i < listContacts.size(); i++) {
                     Contact item = listContacts.get(ids.get(i));
 
@@ -82,11 +89,12 @@ public class GameHelper {
                         keyRole = Game.Role.MAFIA;
                     } else if (countMafia == maxMafia) {
                         keyRole = Game.Role.SHERIFF;
-                    } else if (countMafia == (maxMafia+1)) {
+                    } else if (countMafia == (maxMafia+1) && useDoctor) {
                         keyRole = Game.Role.DOC;
                     } else if (countMafia >= (maxMafia+2) && countMafia < (listContacts.size() - 1)) {
                         keyRole = Game.Role.CITIZEN;
-                    } else if (countMafia == (listContacts.size() - 1) && listContacts.size() >= (Game.MIN_GAMERS + 1)) {
+                    } else if (countMafia == (listContacts.size() - 1) && listContacts.size() >= (Game.MIN_GAMERS + 1)
+                            && useSniper) {
                         keyRole = Game.Role.SNIPER;
                     }
 

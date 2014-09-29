@@ -30,5 +30,6 @@
     <string name="role_sniper">Sniper</string>
     <string name="role_citizen">Citizen</string>
     <string name="change">Change</string>
+    <string name="use_role">Use role:</string>
 
 </resources>
