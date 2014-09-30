@@ -97,22 +97,8 @@ public class GetContactsActivity extends Activity {
             public void run() {
                 if(enable) {
                     etFilter.setEnabled(false);
-                    final Timer timer = new Timer("hideItemMenu", true);
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (itemMenuOk != null) {
-                                try {
-                                    itemMenuOk.setVisible(false);
-                                } catch (Exception e) {}
-                                timer.cancel();
-                            }
-                            }
-                        }
-
-                        ,0,10);
-                        pb.setVisibility(ProgressBar.VISIBLE);
-                        lvContacts.setVisibility(ListView.GONE);
+                    pb.setVisibility(ProgressBar.VISIBLE);
+                    lvContacts.setVisibility(ListView.GONE);
                     } else {
                     itemMenuOk.setVisible(true);
                     etFilter.setEnabled(true);
@@ -195,6 +181,7 @@ public class GetContactsActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.get_contacts, menu);
         itemMenuOk = menu.findItem(R.id.action_ok);
+        itemMenuOk.setVisible(false);
         return true;
     }
 

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -158,6 +159,12 @@ public class ControlPanelFragment extends Fragment {
                     public void run() {
                         pd.dismiss();
                         adapter.add(0, new Info("Distribute role to contact!"));
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                btnSend.performClick();
+                            }
+                        }, 700);
                     }
                 });
             }
