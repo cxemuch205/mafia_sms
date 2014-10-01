@@ -6,22 +6,25 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import ua.mafiasms.DetailRoleContactActivity;
 import ua.mafiasms.GetContactsActivity;
-import ua.mafiasms.NavigationDrawerFragment;
 import ua.mafiasms.R;
-import ua.mafiasms.SplashScreenActivity;
 import ua.mafiasms.adapters.GamersAdapter;
+import ua.mafiasms.constants.App;
 import ua.mafiasms.helpers.StaticDataStorage;
+import ua.mafiasms.interfaces.OnSwitchTabListener;
 import ua.mafiasms.models.Contact;
 
 /**
@@ -65,10 +68,20 @@ public class ListGamersFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        initListData();
+        lvGamers.setOnItemClickListener(itemGamersClickListener);
     }
 
-    private void initListData() {
+    private AdapterView.OnItemClickListener itemGamersClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent showDetailRole = new Intent(getActivity(), DetailRoleContactActivity.class);
+            showDetailRole.putExtra(App.IntentKeys.CONTACT_OBJ, adapterGamers.getItem(position));
+            getActivity().startActivity(showDetailRole);
+        }
+    };
+
+    public void initListData() {
+        Log.d(TAG, "initListData()");
         if (adapterGamers == null) {
             ArrayList<Contact> data = new ArrayList<Contact>();
             data.addAll(StaticDataStorage.getListCurrentContacts());
@@ -106,11 +119,18 @@ public class ListGamersFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, String.format("onActivityResult(%d, %d, data", requestCode, resultCode));
         if (requestCode == REQUEST_CHANGE_LIST) {
             if (resultCode == Activity.RESULT_OK) {
                 initListData();
-                NavigationDrawerFragment.getInstance().selectItem(ControlPanelFragment.INDEX);
+                switchTabListener.onSwitch(ControlPanelFragment.INDEX);
             }
         }
+    }
+
+    private OnSwitchTabListener switchTabListener;
+
+    public void setOnSwitchTabListener(OnSwitchTabListener listener) {
+        this.switchTabListener = listener;
     }
 }

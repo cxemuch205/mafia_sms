@@ -4,14 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import ua.mafiasms.R;
 import ua.mafiasms.constants.App;
@@ -79,15 +82,21 @@ public class SettingsFragment extends Fragment {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             SharedPreferences.Editor editor = pref.edit();
+            Toast toast = Toast.makeText(getActivity(), getString(R.string.update_the_role), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.getView().setBackgroundColor(Color.parseColor("#bbFF0000"));
             switch (buttonView.getId()) {
                 case R.id.cb_use_doctor:
                     editor.putBoolean(App.Pref.WITH_DOCTOR, isChecked).commit();
+                    toast.show();
                     break;
                 case R.id.cb_use_sniper:
                     editor.putBoolean(App.Pref.WITH_SNIPER, isChecked).commit();
+                    toast.show();
                     break;
                 case R.id.cb_use_don:
                     editor.putBoolean(App.Pref.WITH_DON, isChecked).commit();
+                    toast.show();
                     break;
                 case R.id.s_enable_sending:
                     editor.putBoolean(App.Pref.ENABLE_SENDING, isChecked).commit();

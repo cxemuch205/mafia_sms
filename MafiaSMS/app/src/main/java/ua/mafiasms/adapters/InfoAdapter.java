@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ua.mafiasms.R;
+import ua.mafiasms.constants.App;
+import ua.mafiasms.helpers.Tools;
 import ua.mafiasms.models.Info;
 
 /**
@@ -38,6 +40,7 @@ public class InfoAdapter extends ArrayAdapter<Info> {
 
             holder = new ViewHolder();
             holder.tvData = (TextView) view.findViewById(R.id.tv_data);
+            holder.tvData.setTypeface(Tools.getFont(context, App.MTypeface.COMFORTA_BOLD));
 
             view.setTag(holder);
         } else {

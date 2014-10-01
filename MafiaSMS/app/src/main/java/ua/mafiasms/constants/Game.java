@@ -23,4 +23,9 @@ public class Game {
         public static final int ERROR_CAN_NOT_SENDING = 0;
         public static final int SENDING_SUCCESS = 1;
     }
+
+    public interface Color {
+        public static final String MAFIA = "#bb000000";
+        public static final String CITIZEN = "#bbFF0000";
+    }
 }

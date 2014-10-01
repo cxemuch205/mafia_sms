@@ -1,11 +1,13 @@
 package ua.mafiasms.models;
 
+import java.io.Serializable;
+
 import ua.mafiasms.constants.Game;
 
 /**
  * Created by daniil on 9/26/14.
  */
-public class Contact {
+public class Contact implements Serializable{
 
     public String _id;
     public String name;

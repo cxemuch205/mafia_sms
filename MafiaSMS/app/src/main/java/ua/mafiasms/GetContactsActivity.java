@@ -59,12 +59,18 @@ public class GetContactsActivity extends Activity {
         lvContacts = (ListView) findViewById(R.id.lv_contacts);
         pb = (ProgressBar) findViewById(R.id.pb_load);
         etFilter = (EditText) findViewById(R.id.et_filter);
+
         adapter = new ContactsAdapter(this, new ArrayList<Contact>());
+
         lvContacts.setAdapter(adapter);
         lvContacts.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         lvContacts.setOnItemClickListener(itemContactClickListener);
+
         etFilter.addTextChangedListener(watchETListener);
+        etFilter.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
+
         TYPE_REQUEST = getIntent().getIntExtra(TypeRequestActivity.KEY, TypeRequestActivity.CREATE);
+
         if (TYPE_REQUEST == TypeRequestActivity.CREATE) {
             getActionBar().setDisplayHomeAsUpEnabled(false);
         } else {
@@ -201,7 +207,7 @@ public class GetContactsActivity extends Activity {
                 StaticDataStorage.addAllContactsInCurrentList(list, false);
 
                 if (TYPE_REQUEST == TypeRequestActivity.CREATE) {
-                    Intent startGamePanel = new Intent(this, GameProcessActivity.class);
+                    Intent startGamePanel = new Intent(this, ProcessActivity.class);//GameProcessActivity.class);
                     startActivity(startGamePanel);
                     finish();
                 } else {
@@ -213,7 +219,7 @@ public class GetContactsActivity extends Activity {
                 Toast toast = Toast.makeText(this, String.format(text,
                         Game.MIN_GAMERS, list.size()), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.getView().setBackgroundColor(Color.parseColor("#E87223"));
+                toast.getView().setBackgroundColor(Color.parseColor("#bbFF0000"));
                 toast.show();
             }
             return true;

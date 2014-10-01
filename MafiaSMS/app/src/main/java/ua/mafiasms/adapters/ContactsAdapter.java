@@ -16,6 +16,8 @@ import java.util.Collection;
 import java.util.List;
 
 import ua.mafiasms.R;
+import ua.mafiasms.constants.App;
+import ua.mafiasms.helpers.Tools;
 import ua.mafiasms.models.Contact;
 
 /**
@@ -46,6 +48,8 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
             holder.tvName = (TextView) view.findViewById(R.id.tv_name);
             holder.tvNumberPhone = (TextView) view.findViewById(R.id.tv_phone_number);
             holder.cbSelect = (CheckBox) view.findViewById(R.id.cb_select);
+            holder.tvName.setTypeface(Tools.getFont(context, App.MTypeface.COMFORTA_LIGHT));
+            holder.tvNumberPhone.setTypeface(Tools.getFont(context, App.MTypeface.COMFORTA_BOLD));
 
             view.setTag(holder);
         } else {

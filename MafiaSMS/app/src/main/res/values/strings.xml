@@ -15,6 +15,7 @@
     <string name="select_items">Select items, min %d</string>
     <string name="enter_name_or_phone">Enter name or phone</string>
     <string name="distribute_role">Distribute role</string>
+    <string name="update_the_role">Update the role</string>
     <string name="send_messages">Send messages</string>
     <string name="resend">Resend role</string>
     <string name="progress_start_distributing">Start distributing role</string>
@@ -33,5 +34,9 @@
     <string name="use_role">Use role:</string>
     <string name="enable_sending">Enable sending:</string>
     <string name="send_enable_switch">Send</string>
+    <string name="title_activity_process">ProcessActivity</string>
+    <string name="title_activity_detail_role_contact">DetailRoleContactActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

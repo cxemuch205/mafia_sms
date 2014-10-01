@@ -10,6 +10,7 @@
         android:layout_height="52dp"
         android:inputType="textPersonName"
         android:hint="@string/enter_name_or_phone"
+        android:background="@drawable/apptheme_edit_text_holo_light"
         android:ems="10"
         android:id="@+id/et_filter" />
 

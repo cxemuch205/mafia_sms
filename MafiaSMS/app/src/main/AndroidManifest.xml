@@ -23,12 +23,14 @@
         <activity
             android:name=".GetContactsActivity"
             android:label="@string/title_activity_get_contacts"
-            android:screenOrientation="sensorPortrait"  >
+            android:screenOrientation="sensorPortrait" >
         </activity>
         <activity
-            android:name=".GameProcessActivity"
-            android:label="@string/title_activity_game_process"
-            android:screenOrientation="sensorPortrait"  >
+            android:name=".ProcessActivity"
+            android:screenOrientation="sensorPortrait" >
+        </activity>
+        <activity
+            android:name=".DetailRoleContactActivity">
         </activity>
     </application>
 

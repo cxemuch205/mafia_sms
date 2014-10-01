@@ -5,10 +5,14 @@ package ua.mafiasms.constants;
  */
 public class App {
 
-    public static final boolean ACCESS_SEND_MESSAGE = false;
+    public interface IntentKeys{
+        public static final String CONTACT_OBJ = "contact_obj";
+    }
 
     public interface MTypeface{
         public static final String ORNAMENT_VERSALS = "OrnamentalVersals";
+        public static final String COMFORTA_BOLD = "ComfortaaBold";
+        public static final String COMFORTA_LIGHT = "ComfortaaLight";
     }
 
     public interface Pref{

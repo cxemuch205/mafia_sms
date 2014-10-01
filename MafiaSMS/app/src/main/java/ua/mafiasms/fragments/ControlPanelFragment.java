@@ -20,14 +20,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ua.mafiasms.NavigationDrawerFragment;
 import ua.mafiasms.R;
 import ua.mafiasms.adapters.InfoAdapter;
+import ua.mafiasms.constants.App;
 import ua.mafiasms.constants.Game;
 import ua.mafiasms.helpers.GameHelper;
 import ua.mafiasms.helpers.StaticDataStorage;
+import ua.mafiasms.helpers.Tools;
 import ua.mafiasms.interfaces.OnDistributeRoleListener;
 import ua.mafiasms.interfaces.OnSendingMessageListener;
+import ua.mafiasms.interfaces.OnSwitchTabListener;
 import ua.mafiasms.models.Contact;
 import ua.mafiasms.models.Info;
 
@@ -89,11 +91,20 @@ public class ControlPanelFragment extends Fragment {
         if(!StaticDataStorage.withRole){
             Info infoCountGamers = new Info();
             infoCountGamers.data = "Added contacts to game: " + String.valueOf(StaticDataStorage.listCurrentContacts.size());
-            adapter.add(0, infoCountGamers);
+            if(adapter.getCount() == 0)
+                adapter.add(0, infoCountGamers);
         }
         lvInfo.setAdapter(adapter);
         maxMafia = GameHelper.getRecommendedNumberOfMafia(StaticDataStorage.listCurrentContacts.size());
         etMaxMafia.setHint(String.format(getString(R.string.recommended_number__of_maia), maxMafia));
+        etMaxMafia.setEnabled(false);
+        initTypeFaces();
+    }
+
+    private void initTypeFaces() {
+        btnSend.setTypeface(Tools.getFont(getActivity(), App.MTypeface.COMFORTA_LIGHT));
+        btnDistrRole.setTypeface(Tools.getFont(getActivity(), App.MTypeface.COMFORTA_LIGHT));
+        etMaxMafia.setTypeface(Tools.getFont(getActivity(), App.MTypeface.COMFORTA_LIGHT));
     }
 
     private void initProgressDialog() {
@@ -108,9 +119,21 @@ public class ControlPanelFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                etMaxMafia.setEnabled(true);
+            }
+        }, 1000);
+    }
+
     private View.OnClickListener clickBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Tools.hideKeyboard(getActivity());
             switch (v.getId()) {
                 case R.id.btn_distribute_role:
                     if(etMaxMafia.getText().toString().length() > 0){
@@ -209,7 +232,7 @@ public class ControlPanelFragment extends Fragment {
                             toast.show();
                         }
                     });
-                    NavigationDrawerFragment.getInstance().selectItem(ListGamersFragment.INDEX);
+                    switchTabListener.onSwitch(ListGamersFragment.INDEX);
                     break;
             }
             getActivity().runOnUiThread(new Runnable() {
@@ -234,4 +257,10 @@ public class ControlPanelFragment extends Fragment {
             }
         }
     };
+
+    private OnSwitchTabListener switchTabListener;
+
+    public void setOnSwitchTabListener(OnSwitchTabListener listener) {
+        this.switchTabListener = listener;
+    }
 }

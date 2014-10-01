@@ -1,0 +1,13 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="back_action_bar">#55001b</color>
+    <color name="tab_unselected">#55001b</color>
+    <color name="tab_selected">#dc55001b</color>
+    <color name="tab_unselected_focused">#55001b</color>
+    <color name="tab_selected_focused">#8855001b</color>
+    <color name="tab_unselected_pressed">#55001b</color>
+    <color name="tab_selected_pressed">#6655001b</color>
+    <color name="apptheme_color">#55001b</color>
+
+</resources>
