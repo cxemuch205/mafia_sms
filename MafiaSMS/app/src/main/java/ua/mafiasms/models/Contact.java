@@ -13,6 +13,7 @@ public class Contact implements Serializable{
     public String name;
     public String phoneNumber;
     public int role = Game.Role.CITIZEN;
-    public int status = Game.Role.CITIZEN;
     public boolean isSelect;
+    public int rowIdInDB;
+    public String listFavoriteName;
 }
