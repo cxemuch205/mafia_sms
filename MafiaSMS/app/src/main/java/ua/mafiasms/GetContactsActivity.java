@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -39,11 +40,13 @@ import ua.mafiasms.models.Contact;
 public class GetContactsActivity extends Activity {
 
     public static final String TAG = "GetContactsActivity";
+    public static final int REQUEST_NEW_GAMER = 1021;
 
     private ContactsAdapter adapter;
     private ListView lvContacts;
     private EditText etFilter;
     private ProgressBar pb;
+    private Button btnAddCustomGamer;
     private int TYPE_REQUEST;
 
     public interface TypeRequestActivity {
@@ -59,12 +62,15 @@ public class GetContactsActivity extends Activity {
         lvContacts = (ListView) findViewById(R.id.lv_contacts);
         pb = (ProgressBar) findViewById(R.id.pb_load);
         etFilter = (EditText) findViewById(R.id.et_filter);
+        btnAddCustomGamer = (Button) findViewById(R.id.btn_add_custom_gamer);
 
         adapter = new ContactsAdapter(this, new ArrayList<Contact>());
 
         lvContacts.setAdapter(adapter);
         lvContacts.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         lvContacts.setOnItemClickListener(itemContactClickListener);
+
+        btnAddCustomGamer.setOnClickListener(clickAddCustomGamerListener);
 
         etFilter.addTextChangedListener(watchETListener);
         etFilter.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
@@ -75,6 +81,30 @@ public class GetContactsActivity extends Activity {
             getActionBar().setDisplayHomeAsUpEnabled(false);
         } else {
             getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private View.OnClickListener clickAddCustomGamerListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent newGamer = new Intent(GetContactsActivity.this, NewGamerActivity.class);
+
+            startActivityForResult(newGamer, REQUEST_NEW_GAMER);
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_NEW_GAMER) {
+                if (data != null) {
+                    Contact contact = (Contact) data.getExtras().getSerializable(App.IntentKeys.CONTACT_OBJ);
+                    if (contact != null) {
+                        adapter.add(0, contact);
+                    }
+                }
+            }
         }
     }
 

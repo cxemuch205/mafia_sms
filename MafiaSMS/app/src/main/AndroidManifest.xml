@@ -29,8 +29,11 @@
             android:name=".ProcessActivity"
             android:screenOrientation="sensorPortrait" >
         </activity>
+        <activity android:name=".DetailRoleContactActivity" >
+        </activity>
         <activity
-            android:name=".DetailRoleContactActivity">
+            android:name=".NewGamerActivity"
+            android:label="@string/title_activity_new_gamer" >
         </activity>
     </application>
 

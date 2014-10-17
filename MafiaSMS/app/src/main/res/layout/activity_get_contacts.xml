@@ -5,14 +5,33 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:inputType="textPersonName"
-        android:hint="@string/enter_name_or_phone"
-        android:background="@drawable/apptheme_edit_text_holo_light"
-        android:ems="10"
-        android:id="@+id/et_filter" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:inputType="textPersonName"
+            android:hint="@string/enter_name_or_phone"
+            android:background="@drawable/apptheme_edit_text_holo_light"
+            android:ems="10"
+            android:id="@+id/et_filter"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="30sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/apptheme_btn_default_holo_light"
+            android:id="@+id/btn_add_custom_gamer"
+            android:layout_weight="3" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

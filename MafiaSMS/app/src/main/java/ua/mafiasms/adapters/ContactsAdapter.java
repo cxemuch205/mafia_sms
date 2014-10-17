@@ -140,6 +140,11 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
         return result;
     }
 
+    public void add(int index, Contact contact) {
+        data.add(index, contact);
+        notifyDataSetChanged();
+    }
+
     static class ViewHolder{
         TextView tvName;
         TextView tvNumberPhone;
