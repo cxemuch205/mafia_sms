@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -136,10 +137,20 @@ public class ControlPanelFragment extends Fragment {
             Tools.hideKeyboard(getActivity());
             switch (v.getId()) {
                 case R.id.btn_distribute_role:
-                    if(etMaxMafia.getText().toString().length() > 0){
+                    if (etMaxMafia.getText().toString().length() > 0) {
                         maxMafia = Integer.parseInt(etMaxMafia.getText().toString());
+                    } else {
+                        maxMafia = GameHelper.getRecommendedNumberOfMafia(StaticDataStorage.listCurrentContacts.size());
                     }
-                    GameHelper.runDistributeRoles(getActivity(), StaticDataStorage.getListCurrentContacts(), distributeRoleListener, maxMafia);
+                    ArrayList<Contact> listCurGamers = StaticDataStorage.getListCurrentContacts();
+                    if (maxMafia > (listCurGamers.size() / 2 - 1)) {
+                        Toast toast = Toast.makeText(getActivity(), "Number of mafia max " + (listCurGamers.size() / 2 - 1), Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.getView().setBackgroundColor(Color.parseColor("#bbFF0000"));
+                        toast.show();
+                    } else {
+                        GameHelper.runDistributeRoles(getActivity(), listCurGamers, distributeRoleListener, maxMafia);
+                    }
                     break;
                 case R.id.btn_send_msgs:
                     GameHelper.sendMessages(smsManager, getActivity(), StaticDataStorage.getListCurrentContacts(), sendingMessageListener);
@@ -187,7 +198,7 @@ public class ControlPanelFragment extends Fragment {
                             public void run() {
                                 btnSend.performClick();
                             }
-                        }, 700);
+                        }, 100);
                     }
                 });
             }

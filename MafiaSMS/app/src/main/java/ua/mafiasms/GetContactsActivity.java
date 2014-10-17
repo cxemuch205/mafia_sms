@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.util.SparseBooleanArray;
 import android.view.Gravity;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -46,8 +48,11 @@ public class GetContactsActivity extends Activity {
     private ListView lvContacts;
     private EditText etFilter;
     private ProgressBar pb;
+    private TextView tvProgress;
     private Button btnAddCustomGamer;
+
     private int TYPE_REQUEST;
+    private boolean afterAddNewGamer = false;
 
     public interface TypeRequestActivity {
         public static final String KEY = "type_opened";
@@ -61,6 +66,7 @@ public class GetContactsActivity extends Activity {
         setContentView(R.layout.activity_get_contacts);
         lvContacts = (ListView) findViewById(R.id.lv_contacts);
         pb = (ProgressBar) findViewById(R.id.pb_load);
+        tvProgress = (TextView) findViewById(R.id.tv_progress);
         etFilter = (EditText) findViewById(R.id.et_filter);
         btnAddCustomGamer = (Button) findViewById(R.id.btn_add_custom_gamer);
 
@@ -74,6 +80,7 @@ public class GetContactsActivity extends Activity {
 
         etFilter.addTextChangedListener(watchETListener);
         etFilter.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
+        tvProgress.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
 
         TYPE_REQUEST = getIntent().getIntExtra(TypeRequestActivity.KEY, TypeRequestActivity.CREATE);
 
@@ -96,11 +103,14 @@ public class GetContactsActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult()");
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_NEW_GAMER) {
+                afterAddNewGamer = true;
                 if (data != null) {
                     Contact contact = (Contact) data.getExtras().getSerializable(App.IntentKeys.CONTACT_OBJ);
                     if (contact != null) {
+                        StaticDataStorage.getListCurrentContacts().add(contact);
                         adapter.add(0, contact);
                     }
                 }
@@ -134,13 +144,24 @@ public class GetContactsActivity extends Activity {
                 if(enable) {
                     etFilter.setEnabled(false);
                     pb.setVisibility(ProgressBar.VISIBLE);
+                    tvProgress.setVisibility(TextView.VISIBLE);
                     lvContacts.setVisibility(ListView.GONE);
-                    } else {
+                } else {
                     itemMenuOk.setVisible(true);
                     etFilter.setEnabled(true);
                     lvContacts.setVisibility(ListView.VISIBLE);
+                    tvProgress.setVisibility(TextView.GONE);
                     pb.setVisibility(ProgressBar.GONE);
                 }
+            }
+        });
+    }
+
+    private void publishProgress(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvProgress.setText(msg);
             }
         });
     }
@@ -153,8 +174,8 @@ public class GetContactsActivity extends Activity {
                 Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
 
                 final ArrayList<Contact> list = new ArrayList<Contact>();
-                while (phones.moveToNext())
-                {
+                int max = phones.getCount();
+                while (phones.moveToNext()){
                     String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                     String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     String id = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
@@ -178,6 +199,7 @@ public class GetContactsActivity extends Activity {
                     if(isUniq){
                         list.add(item);
                     }
+                    publishProgress(String.format("%d/%d", phones.getPosition(), max));
                 }
                 Collections.sort(list, new Comparator<Contact>() {
                     @Override
@@ -224,8 +246,29 @@ public class GetContactsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        performGetDataContacts();
+        Log.d(TAG, "onResume()");
+        if (!afterAddNewGamer) {
+            adapter.clear();
+            if (TYPE_REQUEST == TypeRequestActivity.EDIT) {
+                addCustomGamers();
+            }
+            performGetDataContacts();
+        }
         Tools.hideKeyboard(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        afterAddNewGamer = false;
+    }
+
+    private void addCustomGamers() {
+        for (Contact c : StaticDataStorage.getListCurrentContacts()) {
+            if (c._id.contains(NewGamerActivity.CUSTOM)) {
+                adapter.add(0, c);
+            }
+        }
     }
 
     @Override
