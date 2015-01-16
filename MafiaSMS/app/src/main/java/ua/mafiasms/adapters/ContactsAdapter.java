@@ -48,8 +48,8 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
             holder.tvName = (TextView) view.findViewById(R.id.tv_name);
             holder.tvNumberPhone = (TextView) view.findViewById(R.id.tv_phone_number);
             holder.cbSelect = (CheckBox) view.findViewById(R.id.cb_select);
-            holder.tvName.setTypeface(Tools.getFont(context, App.MTypeface.COMFORTA_LIGHT));
-            holder.tvNumberPhone.setTypeface(Tools.getFont(context, App.MTypeface.COMFORTA_BOLD));
+            holder.tvName.setTypeface(Tools.getFont(context, App.MTypeface.ROBOTO_LIGHT));
+            holder.tvNumberPhone.setTypeface(Tools.getFont(context, App.MTypeface.ROBOTO_THIN));
 
             view.setTag(holder);
         } else {
@@ -72,6 +72,15 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
         return view;
     }
 
+    public void itemClickUpdate(int position) {
+        if (position > -1 && position < data.size()) {
+            Contact contact = data.get(position);
+            if (contact != null) {
+                contact.isSelect = !contact.isSelect;
+                notifyDataSetChanged();
+            }
+        }
+    }
 
     public void addAll(Collection<? extends Contact> collection, boolean isFilter) {
         super.addAll(collection);
@@ -133,7 +142,7 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
 
     public ArrayList<Contact> getListSelectedContacts(){
         ArrayList<Contact> result = new ArrayList<Contact>();
-        for (Contact item : data){
+        for (Contact item : backup){
             if(item.isSelect)
                 result.add(item);
         }
@@ -142,6 +151,7 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
 
     public void add(int index, Contact contact) {
         data.add(index, contact);
+        backup.add(index, contact);
         notifyDataSetChanged();
     }
 

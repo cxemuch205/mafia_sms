@@ -10,9 +10,9 @@ public class App {
     }
 
     public interface MTypeface{
-        public static final String ORNAMENT_VERSALS = "OrnamentalVersals";
-        public static final String COMFORTA_BOLD = "ComfortaaBold";
-        public static final String COMFORTA_LIGHT = "ComfortaaLight";
+        public static final String ROBOTO_LIGHT = "RobotoLight";
+        public static final String ROBOTO_REGULAR = "RobotoRegular";
+        public static final String ROBOTO_THIN = "RobotoThin";
     }
 
     public interface Pref{

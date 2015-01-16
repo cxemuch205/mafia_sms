@@ -2,14 +2,14 @@ package ua.mafiasms;
 
 import java.util.Locale;
 
-import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 
 import ua.mafiasms.fragments.ControlPanelFragment;
 import ua.mafiasms.fragments.ListGamersFragment;
@@ -18,7 +18,7 @@ import ua.mafiasms.helpers.Tools;
 import ua.mafiasms.interfaces.OnSwitchTabListener;
 
 
-public class ProcessActivity extends Activity implements ActionBar.TabListener {
+public class ProcessActivity extends ActionBarActivity implements ActionBar.TabListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,12 +41,12 @@ public class ProcessActivity extends Activity implements ActionBar.TabListener {
         setContentView(R.layout.activity_process);
 
         // Set up the action bar.
-        final ActionBar actionBar = getActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);

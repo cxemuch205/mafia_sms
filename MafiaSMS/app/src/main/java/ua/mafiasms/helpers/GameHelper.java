@@ -132,8 +132,12 @@ public class GameHelper {
             public void run() {
                 for (int i = 0; i < listContactWithRole.size(); i++) {
                     Contact contact = listContactWithRole.get(i);
-                    final String msgSendData = "Sending msg to: " + contact.name + " \nRole: " + getNameRoleById(activity, contact.role);
-                    String message = "MAFIA\nYou role is " + getNameRoleById(activity, contact.role);
+                    final String msgSendData = activity.getString(R.string.send_msg_to)
+                            + " " + contact.name
+                            + activity.getString(R.string.next_line_role) + " "
+                            + getNameRoleById(activity, contact.role);
+                    String message = "MAFIA\n" + activity.getString(R.string.next_line_role) + " "
+                            + getNameRoleById(activity, contact.role);
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

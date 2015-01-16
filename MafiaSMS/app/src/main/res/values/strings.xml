@@ -5,14 +5,10 @@
     <string name="info_splash_screen">Mafia sms - application in controlling the game, the distribution of roles, etc.</string>
     <string name="title_activity_get_contacts">Select contacts</string>
     <string name="ok">OK</string>
-    <string name="title_activity_game_process">GameProcessActivity</string>
     <string name="title_section1">Control panel</string>
     <string name="title_section2">List gamers</string>
     <string name="title_section3">Settings</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="select_items">Select items, min %d</string>
+    <string name="select_items" formatted="false">Select items %d, min %d</string>
     <string name="enter_name_or_phone">Enter name or phone</string>
     <string name="distribute_role">Distribute role</string>
     <string name="update_the_role">Update the role</string>
@@ -21,8 +17,8 @@
     <string name="progress_start_distributing">Start distributing role</string>
     <string name="progress_get_user_ids">Check ser ids, mixing</string>
     <string name="progress_apply_role">Apply role by ids</string>
-    <string name="progress_sending_msg">Sending msg...</string>
-    <string name="ending">Ending...</string>
+    <string name="progress_sending_msg">Sending msg&#8230;</string>
+    <string name="ending">Ending&#8230;</string>
     <string name="recommended_number__of_maia">№ mafia, recommended %d</string>
     <string name="role_don_mafia">Don mafia</string>
     <string name="role_mafia">Mafia</string>
@@ -39,5 +35,8 @@
     <string name="phone_number">Phone number:</string>
     <string name="add">Add</string>
     <string name="enter_name">Enter name, it is min info.</string>
+    <string name="send_msg_to">Sending msg to:</string>
+    <string name="next_line_role">\nRole:</string>
+    <string name="your_role_is">You role is</string>
 
 </resources>

@@ -40,7 +40,7 @@ public class InfoAdapter extends ArrayAdapter<Info> {
 
             holder = new ViewHolder();
             holder.tvData = (TextView) view.findViewById(R.id.tv_data);
-            holder.tvData.setTypeface(Tools.getFont(context, App.MTypeface.COMFORTA_BOLD));
+            holder.tvData.setTypeface(Tools.getFont(context, App.MTypeface.ROBOTO_REGULAR));
 
             view.setTag(holder);
         } else {

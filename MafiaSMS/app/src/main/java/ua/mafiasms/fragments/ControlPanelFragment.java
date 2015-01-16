@@ -2,7 +2,7 @@ package ua.mafiasms.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -103,9 +103,9 @@ public class ControlPanelFragment extends Fragment {
     }
 
     private void initTypeFaces() {
-        btnSend.setTypeface(Tools.getFont(getActivity(), App.MTypeface.COMFORTA_LIGHT));
-        btnDistrRole.setTypeface(Tools.getFont(getActivity(), App.MTypeface.COMFORTA_LIGHT));
-        etMaxMafia.setTypeface(Tools.getFont(getActivity(), App.MTypeface.COMFORTA_LIGHT));
+        btnSend.setTypeface(Tools.getFont(getActivity(), App.MTypeface.ROBOTO_LIGHT));
+        btnDistrRole.setTypeface(Tools.getFont(getActivity(), App.MTypeface.ROBOTO_LIGHT));
+        etMaxMafia.setTypeface(Tools.getFont(getActivity(), App.MTypeface.ROBOTO_LIGHT));
     }
 
     private void initProgressDialog() {

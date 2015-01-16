@@ -1,11 +1,10 @@
 package ua.mafiasms;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,7 @@ import ua.mafiasms.helpers.Tools;
 import ua.mafiasms.models.Contact;
 
 
-public class NewGamerActivity extends Activity {
+public class NewGamerActivity extends ActionBarActivity {
 
     public static final String TAG = "NewGamerActivity";
     public static final String CUSTOM = "custom";
@@ -32,13 +31,14 @@ public class NewGamerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_gamer);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         etName = (EditText) findViewById(R.id.et_name);
         etPhoneNumber = (EditText) findViewById(R.id.et_phone_number);
         btnAdd = (Button) findViewById(R.id.btn_add);
 
-        etName.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
-        etPhoneNumber.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
-        btnAdd.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
+        etName.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
+        etPhoneNumber.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
+        btnAdd.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
 
         btnAdd.setOnClickListener(clickAddListener);
         random = new Random();
@@ -68,4 +68,14 @@ public class NewGamerActivity extends Activity {
             }
         }
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

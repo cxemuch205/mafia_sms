@@ -1,8 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="ua.mafiasms.GetContactsActivity" >
     <item android:id="@+id/action_ok"
         android:title="@string/ok"
         android:orderInCategory="100"
-        android:showAsAction="always|withText" />
+        app:showAsAction="ifRoom|withText" />
 </menu>

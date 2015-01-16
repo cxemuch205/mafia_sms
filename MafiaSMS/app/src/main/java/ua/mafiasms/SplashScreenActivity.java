@@ -22,7 +22,7 @@ public class SplashScreenActivity extends Activity {
         setContentView(R.layout.activity_splash_screen);
         tvInfo = (TextView) findViewById(R.id.tv_info);
 
-        tvInfo.setTypeface(Tools.getFont(this, App.MTypeface.ORNAMENT_VERSALS));
+        tvInfo.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_REGULAR));
 
         new Handler().postDelayed(new Runnable() {
             @Override

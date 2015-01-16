@@ -44,8 +44,8 @@ public class GamersAdapter extends ArrayAdapter<Contact> {
             holder = new ViewHolder();
             holder.tvName = (TextView) view.findViewById(R.id.tv_name);
             holder.tvRole = (TextView) view.findViewById(R.id.tv_role);
-            holder.tvRole.setTypeface(Tools.getFont(context, App.MTypeface.ORNAMENT_VERSALS));
-            holder.tvName.setTypeface(Tools.getFont(context, App.MTypeface.COMFORTA_LIGHT));
+            holder.tvRole.setTypeface(Tools.getFont(context, App.MTypeface.ROBOTO_THIN));
+            holder.tvName.setTypeface(Tools.getFont(context, App.MTypeface.ROBOTO_LIGHT));
 
             view.setTag(holder);
         } else {

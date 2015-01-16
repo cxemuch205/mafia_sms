@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mafia SMS</string>
+    <string name="info_splash_screen">Mafia sms - приложение для управления процессом раздачи ролей с помощью смс сообщений</string>
+    <string name="title_activity_get_contacts">Выберите контактов</string>
+    <string name="ok">OK</string>
+    <string name="title_section1">Панель управления</string>
+    <string name="title_section2">Игроки</string>
+    <string name="title_section3">Найстройки</string>
+    <string formatted="false" name="select_items">Выбрано элементов %d, минимум %d</string>
+    <string name="enter_name_or_phone">Введите номер телефона или имя</string>
+    <string name="distribute_role">Раздача ролей</string>
+    <string name="update_the_role">Изменение роли</string>
+    <string name="send_messages">Отправка сообщений</string>
+    <string name="resend">Переотправка сообщений</string>
+    <string name="progress_start_distributing">Старт процесса раздачи</string>
+    <string name="progress_get_user_ids">Проверка ИД, фартуна</string>
+    <string name="progress_apply_role">Применение ИД к ролям</string>
+    <string name="progress_sending_msg">Отправка смс&#8230;</string>
+    <string name="ending">Завершение&#8230;</string>
+    <string name="recommended_number__of_maia">Количество мафии, реккомендуем %d</string>
+    <string name="role_don_mafia">Главарь мафии</string>
+    <string name="role_mafia">Мафия</string>
+    <string name="role_sheriff">Шериф</string>
+    <string name="role_doctor">Доктор</string>
+    <string name="role_sniper">Снайпер</string>
+    <string name="role_citizen">Мирный</string>
+    <string name="change">Изменить</string>
+    <string name="use_role">Используемые роли:</string>
+    <string name="enable_sending">Включение отправки:</string>
+    <string name="send_enable_switch">Отправка</string>
+    <string name="title_activity_new_gamer">Новый игрок</string>
+    <string name="name">*Имя:</string>
+    <string name="phone_number">Номер телефона:</string>
+    <string name="add">Добавить</string>
+    <string name="enter_name">Введите имя, это минимальная информация.</string>
+    <string name="send_msg_to">Отправка смс:</string>
+    <string name="next_line_role">\nРоль:</string>
+    <string name="your_role_is">Ваша роль</string>
+
+</resources>

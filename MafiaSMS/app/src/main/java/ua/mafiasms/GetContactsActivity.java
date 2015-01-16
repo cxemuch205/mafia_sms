@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -39,7 +40,7 @@ import ua.mafiasms.helpers.Tools;
 import ua.mafiasms.models.Contact;
 
 
-public class GetContactsActivity extends Activity {
+public class GetContactsActivity extends ActionBarActivity {
 
     public static final String TAG = "GetContactsActivity";
     public static final int REQUEST_NEW_GAMER = 1021;
@@ -79,15 +80,15 @@ public class GetContactsActivity extends Activity {
         btnAddCustomGamer.setOnClickListener(clickAddCustomGamerListener);
 
         etFilter.addTextChangedListener(watchETListener);
-        etFilter.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
-        tvProgress.setTypeface(Tools.getFont(this, App.MTypeface.COMFORTA_LIGHT));
+        etFilter.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
+        tvProgress.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
 
         TYPE_REQUEST = getIntent().getIntExtra(TypeRequestActivity.KEY, TypeRequestActivity.CREATE);
 
         if (TYPE_REQUEST == TypeRequestActivity.CREATE) {
-            getActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         } else {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -229,7 +230,9 @@ public class GetContactsActivity extends Activity {
     private AdapterView.OnItemClickListener itemContactClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            if (adapter != null) {
+                adapter.itemClickUpdate(position);
+            }
         }
     };
 
@@ -252,7 +255,12 @@ public class GetContactsActivity extends Activity {
             if (TYPE_REQUEST == TypeRequestActivity.EDIT) {
                 addCustomGamers();
             }
-            performGetDataContacts();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    performGetDataContacts();
+                }
+            }, 100);
         }
         Tools.hideKeyboard(this);
     }
@@ -288,9 +296,9 @@ public class GetContactsActivity extends Activity {
                     finish();
                 }
             } else {
-                String text = getString(R.string.select_items)+ ", you select %d";
+                String text = getString(R.string.select_items);
                 Toast toast = Toast.makeText(this, String.format(text,
-                        Game.MIN_GAMERS, list.size()), Toast.LENGTH_SHORT);
+                        list.size(), Game.MIN_GAMERS), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.getView().setBackgroundColor(Color.parseColor("#bbFF0000"));
                 toast.show();
